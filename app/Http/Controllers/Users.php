@@ -9,6 +9,7 @@ class Users extends Controller
     //
     function index()
     {
-        return ['name'=>'Gowtham'];
+        return view('sample',['name'=>'Gowtham']);
+        //return ['name'=>'Gowtham'];
     }
 }
