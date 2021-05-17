@@ -11,7 +11,8 @@ class Users extends Controller
     //
     function index()
     {
-        return sample::find(1);
+        $users=sample::all();
+        return $users;
         //return view('sample',['name'=>'Gowtham']);
         //return ['name'=>'Gowtham'];
     }

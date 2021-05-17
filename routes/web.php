@@ -18,3 +18,4 @@ Route::get('/', function () {
 });
 Route::get('/users',[Users::class,'index']);
 Route::view('sample','sample');
+Route::get('/allpost',[Users::class,'index']);
