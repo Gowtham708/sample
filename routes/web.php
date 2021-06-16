@@ -22,7 +22,7 @@ Route::get('/register','App\Http\Controllers\ValidationController@formValidation
 Route::post('/post-register', 'App\Http\Controllers\ValidationController@validateForm')->name('valid');
 Route::get('/login', 'App\Http\Controllers\ValidationController@loginpage')->name('login');
 Route::post('post-login', 'App\Http\Controllers\ValidationController@loginform')->name('auth');
-Route::get('/home', 'App\Http\Controllers\ValidationController@homepage')->name('home');
+Route::get('/home', 'App\Http\Controllers\ValidationController@homepage')->name('home')->middleware('admin');
 Route::get('/logout','App\Http\Controllers\ValidationController@logout')->name('logout');
 Route::get('/forgot','App\Http\Controllers\ValidationController@forgot')->name('forgot');
 Route::get('/sent','App\Http\Controllers\ValidationController@sentemail')->name('sent');

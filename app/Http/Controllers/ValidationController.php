@@ -29,7 +29,7 @@ class ValidationController extends Controller
 {
     public function _construct(Page $user)
     {
-        $this->usersreg = $user;
+        $this->user = $user;
     }
 
     public function formValidation()
@@ -57,6 +57,7 @@ class ValidationController extends Controller
     }
     
     public function logout(){
+        Session::flush();
         return redirect('login');
     }
     public function validateForm(Request $request){
@@ -88,26 +89,21 @@ class ValidationController extends Controller
     public function loginForm(Request $request){
        
         $this->validate($request,[
-            'name' => 'required|min:5|max:30',
+            'name' => 'required|max:30',
 
-            'password' => 'required|min:5|max:10',
-
-            ],[
-                'name.required' => ' The first name field is required.',
-                'name.min' => ' The first name must be at least 5 characters.',
-                'name.max' => ' The first name may not be greater than 35 characters.',
-                'password.required' => ' The last name field is required.',
-                'password.min' => ' The last name must be at least 5 characters.',
-                'password.max' => ' The last name may not be greater than 35 characters.',
+            'password' => 'required|min:5'
             ]);
-            $user = $request->only('email', 'password');
-           // $user=$this->usersreg->where('name',$request->name)->where('password',$request->password)->first();
-    if(isset($user)){
-                //Session::put('id',$user->id);
-                //Session::put('name',$user->name);
-                //toastr()->success('Login Success');
-                return redirect('/home')->with('success','Login Successfully');
-            }else{
+          // $user = $request->all();
+           $user = Page::where('name',$request->name)->first();
+           if($user && Hash::check($request->password,$user->password)){
+               //Session::start();
+    Session::put('id',$user->id);
+    Session::put('name',$user->name);
+
+    //toastr()->success('Login Success');
+    return redirect('/home')->with('success','Login Successfully');
+           }
+            else{
                 return back()->with('error','Invalid Login Credentials');
             }
 }

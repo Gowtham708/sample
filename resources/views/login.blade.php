@@ -18,7 +18,7 @@
 
 <div class="col-sm-3">
 
- <input type="hidden" name="id" value="{{ csrf_token() }}">
+ 
 
 <div class="form-group">
 <label>Name:</label>
